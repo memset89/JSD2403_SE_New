@@ -11,5 +11,6 @@ public class DocDemo {
     public static void main(String[] args) {
         System.out.println("ax");
         System.out.println("bcx");
+        System.out.println("aaa");
     }
 }
