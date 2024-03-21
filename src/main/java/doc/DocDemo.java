@@ -1,6 +1,10 @@
 package doc;
 
 /**
+ * @author zzq
+ * @version 1.0
+ * @see java.lang.String
+ *
  *
  */
 public class DocDemo {
