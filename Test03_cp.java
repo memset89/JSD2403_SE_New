@@ -25,7 +25,7 @@ public class Test03 {
 				String string2=name.substring(name.lastIndexOf("."));
 				String newName=string1+"_cp"+string2;
 				FileInputStream fis=new FileInputStream(sub);
-				FileOutputStream fos=new FileOutputStream("./src/main/java/homework/day05/"+newName);
+				FileOutputStream fos=new FileOutputStream(newName);
 				byte[] buffer=new byte[1024*10];
 				int len;
 				while ((len=fis.read(buffer))!=-1){

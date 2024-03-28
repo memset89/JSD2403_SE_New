@@ -1,4 +1,4 @@
-package homework.day06;
+package homework.day06.answer;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;

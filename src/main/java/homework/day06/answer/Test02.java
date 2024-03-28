@@ -1,4 +1,5 @@
-package homework.day06;
+package homework.day06.answer;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,24 +15,27 @@ import java.io.ObjectInputStream;
 public class Test02 {
     public static void main(String[] args) {
         File dir = new File(".");
-        File[] subs = dir.listFiles((f)->f.getName().endsWith(".obj"));
+        //获取当前目录下的所有obj文件
+        File[] subs = dir.listFiles(f->f.getName().endsWith(".obj"));
         for(int i=0;i<subs.length;i++){
-            File sub = subs[i];//从数组中获取每一个obj文件
+            File file = subs[i];
             try (
-                    FileInputStream fis = new FileInputStream(sub);
-                    ObjectInputStream oos=new ObjectInputStream(fis);
-                    ){
-                    Object obj = oos.readObject();
-                    if(obj instanceof User){
-                        User user = (User)obj;
-                        System.out.println(user);
-                    }
-            }catch (IOException | ClassNotFoundException e) {
+                    FileInputStream fis = new FileInputStream(file);
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+            ){
+                Object obj = ois.readObject();
+                if(obj instanceof User){
+                    User user = (User)obj;
+                    System.out.println(user);
+                }
+
+
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
         }
     }
-
 }
 
 /*
