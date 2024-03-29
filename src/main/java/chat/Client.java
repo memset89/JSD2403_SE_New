@@ -14,9 +14,11 @@ public class Client {
      */
     public Client() {
         //构造器 用于初始化客户端
+
+
         try {
             System.out.println("connection");
-            socket = new Socket("localhost", 8088);//176.17.13.62
+            socket = new Socket("176.17.13.62", 8088);//176.17.13.62
             System.out.println("connection success");
         }catch (IOException e) {
             e.printStackTrace();
@@ -36,9 +38,18 @@ public class Client {
             BufferedWriter bw = new BufferedWriter(writer);
             PrintWriter pw = new PrintWriter(bw, true);
             Scanner scanner = new Scanner(System.in);
+            System.out.println("请输入昵称：");
+            String nickname;
+            while (true){
+                nickname = scanner.nextLine();
+                if(nickname.trim().length() > 0){
+                    pw.println(nickname);
+                    break;
+                }
+            }
            while (true){
-               String msg = scanner.nextLine();
 
+               String msg = scanner.nextLine();
                 pw.println(msg);
                 if("exit".equals(msg)){
                     System.out.println("客户端退出成功");
