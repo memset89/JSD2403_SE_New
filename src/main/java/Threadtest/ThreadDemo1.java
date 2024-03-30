@@ -1,6 +1,4 @@
-package Thread;
-
-import static java.lang.Thread.*;
+package Threadtest;
 
 public class ThreadDemo1 {
     public static void main(String[] args) throws InterruptedException {

@@ -1,15 +1,14 @@
 package chat;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-
+import java.util.ArrayList;
+import java.util.List;
 import static sun.security.util.PolicyUtil.getInputStream;
-
 public class Server {
     private ServerSocket serverSocket;
-
+    private List<PrintWriter> allOut=new ArrayList<>();
     public Server() {
         try {
             System.out.println("服务器启动中");
@@ -20,7 +19,6 @@ public class Server {
         }
     }
     public void start (){
-
         try {
             while(true) {
                 System.out.println("等待客户端链接...");
@@ -40,7 +38,6 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
     public static void main(String[] args) {
         Server server = new Server();
@@ -61,14 +58,26 @@ public class Server {
                     //String data = in.read();
                     InputStreamReader isr = new InputStreamReader(in);
                     BufferedReader br = new BufferedReader(isr);
+                    //
+                    OutputStream out = socket.getOutputStream();
+                    OutputStreamWriter osw = new OutputStreamWriter(out,StandardCharsets.UTF_8);
+                    BufferedWriter bw = new BufferedWriter(osw);
+                    PrintWriter pw = new PrintWriter(out,true);
+                    //
                     String nickname=br.readLine();
+                    allOut.add(pw);//将该客户端的输出流存入集合中
+                    System.out.println(nickname+"加入聊天室,当前在线人数："+allOut.size());
                     while (true) {
                         String data = br.readLine();
-                        if (data.equals("exit")) {
-                            System.out.println("客户端退出");
-                            break;
-                        }
+//                        if (data.equals("exit")) {
+//                            System.out.println("客户端退出");
+//                            break;
+//                        }
                         System.out.println(nickname+"["+ip+"]"+":"+data);
+                        for (PrintWriter o:allOut) {
+                            o.println(nickname+"["+ip+"]"+":"+data);
+                        }
+                        //pw.println(nickname+"["+ip+"]"+":"+data);
                     }
                 }
                 catch (IOException e) {
