@@ -4,8 +4,8 @@ public class SyncDemo6 {
     public static void main(String[] args) {
         //演示一下互斥
         Foo f=new Foo();
-        Thread t1=new Thread(()->f.method1());
-        Thread t2=new Thread(()->f.method2());
+        Thread t1=new Thread(f::method1);
+        Thread t2=new Thread(f::method2);
         t1.start();
         t2.start();
     }
